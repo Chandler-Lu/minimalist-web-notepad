@@ -38,7 +38,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	filePath := filepath.Join(savePath, path)
+	filePath := filepath.Join(savePath, path+".md")
 
 	if r.Method == http.MethodPost {
 		if e := r.ParseForm(); e != nil {
