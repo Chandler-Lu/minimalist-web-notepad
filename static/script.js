@@ -23,8 +23,7 @@ function uploadContent() {
         request.send('text=' + encodeURIComponent(temp));
 
         // Make the content available to print.
-        printable.removeChild(printable.firstChild);
-        printable.appendChild(document.createTextNode(temp));
+        renderMarkdown(temp);
     }
     else {
 
@@ -35,10 +34,21 @@ function uploadContent() {
 
 var textarea = document.getElementById('content');
 var printable = document.getElementById('printable');
+var preview = document.getElementById('preview');
 var content = textarea.value;
+var md = window.markdownit({
+    breaks: true,
+    linkify: true
+});
+
+function renderMarkdown(text) {
+    var rendered = md.render(text);
+    preview.innerHTML = rendered;
+    printable.innerHTML = rendered;
+}
 
 // Make the content available to print.
-printable.appendChild(document.createTextNode(content));
+renderMarkdown(content);
 
 textarea.focus();
 uploadContent();
