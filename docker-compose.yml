@@ -1,10 +1,9 @@
-version: '3'
 services:
   notepad:
     container_name: "notepad"
+    image: notepad-md:latest
     restart: unless-stopped
     ports:
-      - "9099:9099"
+      - "127.0.0.1:8003:9099"
     volumes:
-      - "./_tmp:/app/_tmp"
-    image: fghwett/notepad:latest
+      - "./data:/app/_tmp"
